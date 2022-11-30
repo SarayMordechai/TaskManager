@@ -4,3 +4,26 @@ table {
 .make_row{
   display:flex;
 }
+.mat-icon{
+  height:20px !important;
+  width:20px !important;
+  font-size:20px !important;
+}
+.example-button-container{
+/* resize button size*/
+  display:flex;
+  flex-direction:row;
+  justify-content:space-between;
+  width:100%;
+}
+.example-button-container button{
+  width: 30px;
+  height: 30px;
+  margin:5px;
+}
+.example-button-container button:first-child{
+  margin-left:0px;
+}
+.example-button-container button:last-child{
+  margin-right:0px;
+}

@@ -18,6 +18,8 @@ export class NewEmployeeDailogComponent {
   desc: string = "";
   position: number = 0;
   disableOk: boolean = true;
+  isValidDate:boolean = true;
+  isValidDescription:boolean = true;
 
   Priorities: priorities[] = [
     {value: 'Low', viewValue: 'Low'},
@@ -29,15 +31,31 @@ export class NewEmployeeDailogComponent {
     @Inject(MAT_DIALOG_DATA) public data: any,
   ) {
     this.desc = data[1];
-
-
+    this.data[0].priority = "Low";
   }
   onclick(): void {
     this.dialogRef.close();
   }
 
-  isDateValid() {
-
-    alert('ggg');
+  checkDateValidation() {
+    //make sure the this.data[0].Date is Valid
+    if (this.data[0].Date != null && this.data[0].Date != "") {
+      this.isValidDate = false;
+    }
+    else{
+      this.isValidDate = true;
+    }
+    this.disableOk = this.isValidDate || this.isValidDescription;
   }
+  checkDescriptionValidation() {
+    //make sure the this.data[0].description is Valid
+    if (this.data[0].description != null && this.data[0].description != "") {
+      this.isValidDescription = false;
+    }
+    else{
+      this.isValidDescription = true;
+    }
+    this.disableOk = this.isValidDate || this.isValidDescription;
+  }
+
 }
