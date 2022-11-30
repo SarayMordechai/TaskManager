@@ -32,6 +32,8 @@ export class NewEmployeeDailogComponent {
   ) {
     this.desc = data[1];
     this.data[0].priority = "Low";
+    this.checkDateValidation();
+    this.checkDescriptionValidation();
   }
   onclick(): void {
     this.dialogRef.close();

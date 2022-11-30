@@ -1,8 +1,13 @@
 table {
   width: 100%;
+
 }
 .make_row{
   display:flex;
+
+}
+.center{
+
 }
 .mat-icon{
   height:20px !important;

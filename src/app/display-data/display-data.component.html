@@ -1,4 +1,4 @@
-<button mat-raised-button color="primary" type="button" style="float: right" class="btn btn-info add-new" (click)="openAddDialog()"><i class="fa fa-plus"></i> Add New</button>
+<button mat-raised-button color="blank" type="button" style="float: right" class="btn btn-info add-new" (click)="openAddDialog()"><i class="fa fa-plus"></i> Add New</button>
 <div class="mat-elevation-z8">
   <table mat-table [dataSource]="dataSource">
     <!-- Position Column -->
@@ -30,12 +30,12 @@
       <td mat-cell *matCellDef="let element">
         <div class="make_row">
           <div class="example-button-container" style="">
-            <button mat-fab color="primary" (click)="deleteRow(element)" (resize)="5" aria-label="Example icon button with a delete icon">
+            <button mat-fab color="blank" (click)="deleteRow(element)" (resize)="5" aria-label="Example icon button with a delete icon">
               <mat-icon>delete</mat-icon>
             </button>
           </div>
           <div class="example-button-container" style="">
-            <button mat-fab color="primary" (click)="openUpdateDialog(element)" (resize)="5" aria-label="Example icon button with a delete icon">
+            <button mat-fab color="blank" (click)="openUpdateDialog(element)" (resize)="5" aria-label="Example icon button with a delete icon">
               <mat-icon>edit</mat-icon>
             </button>
           </div>
