@@ -4,14 +4,12 @@ import {MatPaginator} from "@angular/material/paginator";
 import {MatDialog, MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {NewEmployeeDailogComponent} from "./new-employee-dailog/new-employee-dailog.component";
 
-
 export interface PeriodicElement {
   position: number;
   Date: string;
   description: string;
   priority: string;
 }
-
 
 @Component({
   selector: 'app-display-data',
@@ -20,18 +18,19 @@ export interface PeriodicElement {
 })
 export class DisplayDataComponent implements AfterViewInit {
   constructor(public dialog: MatDialog) {
+
   }
   displayedColumns: string[] = ['position', 'Date', 'description', 'priority','action'];
   ELEMENT_DATA: PeriodicElement[] = [
   ];
   dataSource = new MatTableDataSource<PeriodicElement>(this.ELEMENT_DATA);
-
+  switch_flag = true;
 
   @ViewChild(MatPaginator) paginator: any;
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource = new MatTableDataSource<PeriodicElement>(JSON.parse(localStorage.getItem('data') || '{}'));
-    this.ELEMENT_DATA = JSON.parse(localStorage.getItem('data') || '{}');
+    this.ELEMENT_DATA = JSON.parse(localStorage.getItem('data') || '[]');
     this.dataSource.paginator = this.paginator;
   }
 
@@ -45,13 +44,34 @@ export class DisplayDataComponent implements AfterViewInit {
       if (result == undefined) {
         return;
       }
-      let date = new Date(result.Date)
-      result.Date = date.getDay()+"/"+date.getMonth()+"/"+date.getFullYear();
       result.position = this.ELEMENT_DATA.length + 1;
       this.ELEMENT_DATA.push(result);
       this.updateTable();
     });
   }
+
+  choise_array_and_sort(){
+    var arr: any = [];
+    if(this.switch_flag){
+      arr = this.sort_data_by_prio(["High","Medium","Low"]);
+    }
+    else{
+      arr = this.sort_data_by_prio(["Low","Medium","High"]);
+    }
+    this.switch_flag = !this.switch_flag;
+    this.sort_data_by_prio(arr);
+  }
+  sort_data_by_prio(_arr: any) {
+    var priorityArray = _arr;
+    this.ELEMENT_DATA.sort(function (a, b) {
+      var firstPrio = priorityArray.indexOf(a.priority);
+      var secPrio = priorityArray.indexOf(b.priority)
+      return firstPrio - secPrio
+    });
+    this.updateTable();
+    this.update_indexs()
+  }
+
 
 
   openUpdateDialog(data: any): void {

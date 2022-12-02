@@ -5,7 +5,7 @@
 
     <mat-label>Choose a date</mat-label>
     <mat-hint>MM/DD/YYYY</mat-hint>
-    <input matInput [matDatepicker]="picker" placeholder="Choose a date" (dateChange)="checkDateValidation()" [(ngModel)]="data[0].Date"  >
+    <input matInput [matDatepicker]="picker" placeholder="Choose a date" (dateChange)="checkDateValidation()" [(ngModel)]= this.Date >
     <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker #picker></mat-datepicker>
     <p style="font-size: 10px; color:red" *ngIf="this.isValidDate"> *Please choose valid date.* </p>
@@ -31,5 +31,5 @@
 
 <div mat-dialog-actions>
   <button mat-button (click)="onclick()">Close</button>
-  <button mat-button [mat-dialog-close]="{position: data[0].position, Date: data[0].Date, description: data[0].description, priority: data[0].priority}" [disabled]="this.disableOk" cdkFocusInitial>Ok</button>
+  <button mat-button [mat-dialog-close]="{position: data[0].position, Date: this.Date | date:'shortDate', description: data[0].description, priority: data[0].priority}" [disabled]="this.disableOk" cdkFocusInitial>Ok</button>
 </div>

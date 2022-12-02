@@ -17,6 +17,7 @@ import {MatInputModule} from "@angular/material/input";
 import {MatNativeDateModule, MatOptionModule} from "@angular/material/core";
 import {MatSelectModule} from "@angular/material/select";
 import {MatDatepickerModule} from "@angular/material/datepicker";
+import {MatSortModule} from "@angular/material/sort";
 
 @NgModule({
   declarations: [
@@ -24,24 +25,25 @@ import {MatDatepickerModule} from "@angular/material/datepicker";
     DisplayDataComponent,
     NewEmployeeDailogComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    MatTableModule,
-    MatPaginatorModule,
-    MatIconModule,
-    MatButtonModule,
-    MatDialogModule,
-    MatFormFieldModule,
-    FormsModule,
-    MatInputModule,
-    MatOptionModule,
-    MatSelectModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    ReactiveFormsModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        MatTableModule,
+        MatPaginatorModule,
+        MatIconModule,
+        MatButtonModule,
+        MatDialogModule,
+        MatFormFieldModule,
+        FormsModule,
+        MatInputModule,
+        MatOptionModule,
+        MatSelectModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        ReactiveFormsModule,
+        MatSortModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

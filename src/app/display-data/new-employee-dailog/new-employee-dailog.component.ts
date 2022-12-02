@@ -20,7 +20,7 @@ export class NewEmployeeDailogComponent {
   disableOk: boolean = true;
   isValidDate:boolean = true;
   isValidDescription:boolean = true;
-
+  short_date = ""
   Priorities: priorities[] = [
     {value: 'Low', viewValue: 'Low'},
     {value: 'Medium', viewValue: 'Medium'},
@@ -40,8 +40,7 @@ export class NewEmployeeDailogComponent {
   }
 
   checkDateValidation() {
-    //make sure the this.data[0].Date is Valid
-    if (this.data[0].Date != null && this.data[0].Date != "") {
+    if (this.Date != null && this.Date != "") {
       this.isValidDate = false;
     }
     else{

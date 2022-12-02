@@ -1,6 +1,7 @@
+<script src="display-data.component.ts"></script>
 <button mat-raised-button color="blank" type="button" style="float: right" class="btn btn-info add-new" (click)="openAddDialog()"><i class="fa fa-plus"></i> Add New</button>
 <div class="mat-elevation-z8">
-  <table mat-table [dataSource]="dataSource">
+  <table mat-table [dataSource]="dataSource" matSort (matSortChange)="choise_array_and_sort()" class="mat-elevation-z8">
     <!-- Position Column -->
     <ng-container matColumnDef="position">
       <th mat-header-cell *matHeaderCellDef> No. </th>
@@ -19,9 +20,8 @@
       <td mat-cell *matCellDef="let element"> {{element.description}} </td>
     </ng-container>
 
-    <!-- Symbol Column -->
     <ng-container matColumnDef="priority">
-      <th mat-header-cell *matHeaderCellDef> priority </th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by weight"> priority </th>
       <td mat-cell *matCellDef="let element"> {{element.priority}} </td>
     </ng-container>
 
