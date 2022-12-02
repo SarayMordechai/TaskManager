@@ -61,6 +61,7 @@ export class DisplayDataComponent implements AfterViewInit {
     this.switch_flag = !this.switch_flag;
     this.sort_data_by_prio(arr);
   }
+
   sort_data_by_prio(_arr: any) {
     var priorityArray = _arr;
     this.ELEMENT_DATA.sort(function (a, b) {
@@ -86,8 +87,7 @@ export class DisplayDataComponent implements AfterViewInit {
       if (result == undefined) {
         return;
       }
-      let date = new Date(result.Date)
-      result.Date = date.getDay()+"/"+date.getMonth()+"/"+date.getFullYear();
+
       this.ELEMENT_DATA[data.position - 1] = result;
       this.updateTable();
     });

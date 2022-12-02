@@ -31,7 +31,9 @@ export class NewEmployeeDailogComponent {
     @Inject(MAT_DIALOG_DATA) public data: any,
   ) {
     this.desc = data[1];
-    this.data[0].priority = "Low";
+    data[0].priority = "Low";
+    this.Date = new Date(data[0].Date).toJSON();
+    console.log(this.Date);
     this.checkDateValidation();
     this.checkDescriptionValidation();
   }
