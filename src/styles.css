@@ -11,3 +11,8 @@ background:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABkAAAAKqCAYAAABinJ
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.centerDialog {
+  min-height: 200px;
+  top:45%
+}

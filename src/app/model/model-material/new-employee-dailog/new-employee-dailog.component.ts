@@ -33,7 +33,6 @@ export class NewEmployeeDailogComponent {
     this.desc = data[1];
     data[0].priority = "Low";
     this.Date = new Date(data[0].Date).toJSON();
-    console.log(this.Date);
     this.checkDateValidation();
     this.checkDescriptionValidation();
   }
@@ -61,4 +60,7 @@ export class NewEmployeeDailogComponent {
     this.disableOk = this.isValidDate || this.isValidDescription;
   }
 
+}
+
+export class DisplayDataMaterialComponent {
 }

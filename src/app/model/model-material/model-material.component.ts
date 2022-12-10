@@ -12,23 +12,21 @@ export interface PeriodicElement {
 }
 
 @Component({
-  selector: 'app-display-data',
-  templateUrl: './display-data.component.html',
-  styleUrls: ['./display-data.component.css']
+  selector: 'app-model-material',
+  templateUrl: './model-material.component.html',
+  styleUrls: ['./model-material.component.css']
 })
-export class DisplayDataComponent implements AfterViewInit {
+export class ModelMaterialComponent implements AfterViewInit {
   constructor(public dialog: MatDialog) {
 
   }
   displayedColumns: string[] = ['position', 'Date', 'description', 'priority','action'];
-  ELEMENT_DATA: PeriodicElement[] = [
-  ];
+  ELEMENT_DATA: PeriodicElement[] = [];
   dataSource = new MatTableDataSource<PeriodicElement>(this.ELEMENT_DATA);
   switch_flag = true;
 
   @ViewChild(MatPaginator) paginator: any;
   ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
     this.dataSource = new MatTableDataSource<PeriodicElement>(JSON.parse(localStorage.getItem('data') || '{}'));
     this.ELEMENT_DATA = JSON.parse(localStorage.getItem('data') || '[]');
     this.dataSource.paginator = this.paginator;
@@ -101,8 +99,8 @@ export class DisplayDataComponent implements AfterViewInit {
     this.dataSource = new MatTableDataSource<PeriodicElement>(this.ELEMENT_DATA);
     localStorage.setItem('data', JSON.stringify(this.ELEMENT_DATA));
     this.dataSource.paginator = this.paginator;
-
   }
+
   update_indexs() {
     for (let i = 0; i < this.ELEMENT_DATA.length; i++) {
       this.ELEMENT_DATA[i].position = i + 1;

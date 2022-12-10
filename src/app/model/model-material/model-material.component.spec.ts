@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DisplayDataComponent } from './display-data.component';
+import { ModelMaterialComponent } from './model-material.component';
 
-describe('DisplayDataComponent', () => {
-  let component: DisplayDataComponent;
-  let fixture: ComponentFixture<DisplayDataComponent>;
+describe('ModelMaterialComponent', () => {
+  let component: ModelMaterialComponent;
+  let fixture: ComponentFixture<ModelMaterialComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DisplayDataComponent ]
+      declarations: [ ModelMaterialComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(DisplayDataComponent);
+    fixture = TestBed.createComponent(ModelMaterialComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
