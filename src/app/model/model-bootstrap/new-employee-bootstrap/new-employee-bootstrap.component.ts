@@ -1,5 +1,4 @@
 import {AfterViewInit, Component, EventEmitter, Inject, Output} from '@angular/core';
-import {ModalDismissReasons, NgbDatepickerModule, NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import { ModalModule, BsModalService } from 'ngx-bootstrap/modal';
 import {BsModalRef} from "ngx-bootstrap/modal";
 

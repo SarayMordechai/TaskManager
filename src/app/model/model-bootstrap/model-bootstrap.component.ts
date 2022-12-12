@@ -1,8 +1,6 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
 import { NewEmployeeBootstrapComponent } from './new-employee-bootstrap/new-employee-bootstrap.component';
-import { ModalDismissReasons, NgbDatepickerModule, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalModule, BsModalService } from 'ngx-bootstrap/modal';
-import {MatTableDataSource} from "@angular/material/table";
 
 
 interface PeriodicElement {
@@ -23,12 +21,21 @@ const Element: PeriodicElement[] = [];
 export class ModelBootstrapComponent implements OnInit {
   PeriodicElement = Element;
   pageSize: number = 2;
+  start = 0;
+  end = 5;
   constructor(private modalService: BsModalService) {
   }
+  switch_flag = true;
+  itemsPerPage: any;
+  page: any;
+  total$: any;
+  pages: number[] | undefined ;
 
   ngOnInit() {
     this.PeriodicElement = JSON.parse(localStorage.getItem('data') || '[]');
-    console.log("csd"+this.PeriodicElement);
+    this.pages = Array(Math.ceil(this.PeriodicElement.length / 5)).fill(0).map((x, i) => i + 1);
+
+
   }
 
   openDialog() {
@@ -37,15 +44,15 @@ export class ModelBootstrapComponent implements OnInit {
     // @ts-ignore
     bsModel.content.transferData.subscribe((data) => {
       console.log(data);
-      //add to Element another using the data
       let newElement :PeriodicElement = {
-        position: Element.length + 1,
+        position: this.PeriodicElement.length + 1,
         Date: data.Date,
         description: data.description,
         priority: data.priority
       }
       this.PeriodicElement.push(newElement);
       this.updateTable();
+
     });
 
   }
@@ -75,6 +82,58 @@ export class ModelBootstrapComponent implements OnInit {
   }
   updateTable(){
     localStorage.setItem('data', JSON.stringify(this.PeriodicElement));
+    this.pages = Array(Math.ceil(this.PeriodicElement.length / 5)).fill(0).map((x, i) => i + 1);
+    this.update_indexs();
+
+  }
+  choise_array_and_sort(){
+    var arr: any = [];
+    if(this.switch_flag){
+      arr = this.sort_data_by_prio(["High","Medium","Low"]);
+    }
+    else{
+      arr = this.sort_data_by_prio(["Low","Medium","High"]);
+    }
+    this.switch_flag = !this.switch_flag;
+    this.sort_data_by_prio(arr);
+  }
+
+  sort_data_by_prio(_arr: any) {
+    var priorityArray = _arr;
+    this.PeriodicElement.sort(function (a, b) {
+      try {
+        var firstPrio = priorityArray.indexOf(a.priority);
+        var secPrio = priorityArray.indexOf(b.priority)
+        return firstPrio - secPrio
+      }
+      catch (e) {
+        return 0;
+      }
+    });
+    this.updateTable();
+  }
+
+  change() {
+    this.PeriodicElement = this.PeriodicElement.slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
+  }
+  prev() {
+    this.start -= 5;
+    this.end -= 5;
+  }
+
+  next() {
+    this.start += 5;
+    this.end += 5;
+  }
+  goToPage(page: number) {
+    this.start = (page - 1) * 5;
+    this.end = page * 5;
+  }
+
+  update_indexs() {
+    for (let i = 0; i < this.PeriodicElement.length; i++) {
+      this.PeriodicElement[i].position = i + 1;
+    }
   }
 }
 

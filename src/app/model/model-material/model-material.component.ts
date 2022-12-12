@@ -63,15 +63,18 @@ export class ModelMaterialComponent implements AfterViewInit {
   sort_data_by_prio(_arr: any) {
     var priorityArray = _arr;
     this.ELEMENT_DATA.sort(function (a, b) {
-      var firstPrio = priorityArray.indexOf(a.priority);
-      var secPrio = priorityArray.indexOf(b.priority)
-      return firstPrio - secPrio
+      try {
+        var firstPrio = priorityArray.indexOf(a.priority);
+        var secPrio = priorityArray.indexOf(b.priority)
+        return firstPrio - secPrio
+      }
+      catch (e) {
+        return 0;
+      }
     });
     this.updateTable();
     this.update_indexs()
   }
-
-
 
   openUpdateDialog(data: any): void {
     const dialogRef = this.dialog.open(NewEmployeeDailogComponent, {

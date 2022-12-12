@@ -7,9 +7,12 @@ import {ModelBootstrapComponent} from "./model/model-bootstrap/model-bootstrap.c
 const routes: Routes = [
   { path: 'HomePage', component: HomePageComponent },
   { path: 'Material', component: ModelMaterialComponent },
-  { path: 'Boostrap', component: ModelBootstrapComponent }
+  { path: 'Boostrap', component: ModelBootstrapComponent },
+  { path: '', redirectTo: 'HomePage', pathMatch: 'full'}
 
 ];
+
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
