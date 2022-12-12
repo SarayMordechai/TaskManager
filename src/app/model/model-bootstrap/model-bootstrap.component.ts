@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import { NewEmployeeBootstrapComponent } from './new-employee-bootstrap/new-employee-bootstrap.component';
 import { BsModalService } from 'ngx-bootstrap/modal';
 
-
 interface PeriodicElement {
   position: number;
   Date: string;
