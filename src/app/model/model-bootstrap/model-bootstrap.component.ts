@@ -1,6 +1,6 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { NewEmployeeBootstrapComponent } from './new-employee-bootstrap/new-employee-bootstrap.component';
-import { ModalModule, BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalService } from 'ngx-bootstrap/modal';
 
 
 interface PeriodicElement {
@@ -34,8 +34,7 @@ export class ModelBootstrapComponent implements OnInit {
   ngOnInit() {
     this.PeriodicElement = JSON.parse(localStorage.getItem('data') || '[]');
     this.pages = Array(Math.ceil(this.PeriodicElement.length / 5)).fill(0).map((x, i) => i + 1);
-
-
+    this.update_indexs();
   }
 
   openDialog() {
@@ -52,15 +51,16 @@ export class ModelBootstrapComponent implements OnInit {
       }
       this.PeriodicElement.push(newElement);
       this.updateTable();
-
     });
-
   }
 
   deleteRow(element:any) {
     let index = this.PeriodicElement.indexOf(element);
     this.PeriodicElement.splice(index,1);
     this.updateTable();
+    if (this.PeriodicElement.length % 5 === 0) {
+      this.prev();
+    }
   }
 
   openUpdateDialog(element:any) {
@@ -87,15 +87,14 @@ export class ModelBootstrapComponent implements OnInit {
 
   }
   choise_array_and_sort(){
-    var arr: any = [];
+    var order_type = [["High", "Medium", "Low"], ["Low", "Medium", "High"]];
     if(this.switch_flag){
-      arr = this.sort_data_by_prio(["High","Medium","Low"]);
+      this.sort_data_by_prio(order_type[0]);
     }
     else{
-      arr = this.sort_data_by_prio(["Low","Medium","High"]);
+      this.sort_data_by_prio(order_type[1]);
     }
     this.switch_flag = !this.switch_flag;
-    this.sort_data_by_prio(arr);
   }
 
   sort_data_by_prio(_arr: any) {
@@ -117,14 +116,19 @@ export class ModelBootstrapComponent implements OnInit {
     this.PeriodicElement = this.PeriodicElement.slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
   }
   prev() {
-    this.start -= 5;
-    this.end -= 5;
+    if(this.start > 0){
+      this.start -= 5;
+      this.end -= 5;
+    }
   }
 
   next() {
-    this.start += 5;
-    this.end += 5;
+    if(this.end < this.PeriodicElement.length) {
+      this.start += 5;
+      this.end += 5;
+    }
   }
+
   goToPage(page: number) {
     this.start = (page - 1) * 5;
     this.end = page * 5;

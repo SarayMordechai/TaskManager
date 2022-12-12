@@ -1,7 +1,7 @@
-import {AfterViewInit, Component, Inject, Input, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ViewChild} from '@angular/core';
 import {MatTableDataSource} from "@angular/material/table";
 import {MatPaginator} from "@angular/material/paginator";
-import {MatDialog, MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {MatDialog} from '@angular/material/dialog';
 import {NewEmployeeDailogComponent} from "./new-employee-dailog/new-employee-dailog.component";
 
 export interface PeriodicElement {
@@ -49,18 +49,17 @@ export class ModelMaterialComponent implements AfterViewInit {
   }
 
   choise_array_and_sort(){
-    var arr: any = [];
+    var order_type = [["High", "Medium", "Low"], ["Low", "Medium", "High"]];
     if(this.switch_flag){
-      arr = this.sort_data_by_prio(["High","Medium","Low"]);
+      this.sort_data_by_prio(order_type[0]);
     }
     else{
-      arr = this.sort_data_by_prio(["Low","Medium","High"]);
+      this.sort_data_by_prio(order_type[1]);
     }
     this.switch_flag = !this.switch_flag;
-    this.sort_data_by_prio(arr);
   }
 
-  sort_data_by_prio(_arr: any) {
+sort_data_by_prio(_arr: any) {
     var priorityArray = _arr;
     this.ELEMENT_DATA.sort(function (a, b) {
       try {

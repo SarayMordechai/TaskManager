@@ -1,5 +1,5 @@
-import {AfterViewInit, Component, EventEmitter, Inject, Output} from '@angular/core';
-import { ModalModule, BsModalService } from 'ngx-bootstrap/modal';
+import {AfterViewInit, Component, EventEmitter, Inject} from '@angular/core';
+import { BsModalService } from 'ngx-bootstrap/modal';
 import {BsModalRef} from "ngx-bootstrap/modal";
 
 
@@ -23,7 +23,6 @@ export class NewEmployeeBootstrapComponent implements AfterViewInit {
 
 
   constructor(@Inject(BsModalService) public modal: any) {
-    const initialState = modal.initialState;
     this.priority = "Low";
   }
 
@@ -53,6 +52,4 @@ export class NewEmployeeBootstrapComponent implements AfterViewInit {
     this.isValidDescription = !(this.description != null && this.description != "");
     this.disableOk = this.isValidDate || this.isValidDescription;
   }
-
-
 }

@@ -37,9 +37,8 @@
   <nav aria-label="Page navigation example">
     <ul class="pagination">
       <li class="page-item"><a class="page-link" (click)="prev()">Previous</a></li>
-      <li *ngFor="let page of pages; index as i" (click)="goToPage(page)" class="page-item"><a class="page-link" >{{i+1}}</a></li>
+      <li *ngFor="let page of pages | slice:0:5; index as i" (click)="goToPage(page)" class="page-item"><a class="page-link" >{{i+1}}</a></li>
       <li class="page-item"><a class="page-link" (click)="next()">Next</a></li>
     </ul>
   </nav>
-
   </div>
