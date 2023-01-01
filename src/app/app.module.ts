@@ -17,7 +17,6 @@ import {MatNativeDateModule, MatOptionModule} from "@angular/material/core";
 import {MatSelectModule} from "@angular/material/select";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatSortModule} from "@angular/material/sort";
-import { HomePageComponent } from './home-page/home-page.component';
 import { ModelBootstrapComponent } from './model/model-bootstrap/model-bootstrap.component';
 import { ModelMaterialComponent } from './model/model-material/model-material.component';
 import { NewEmployeeBootstrapComponent } from './model/model-bootstrap/new-employee-bootstrap/new-employee-bootstrap.component';
@@ -28,7 +27,6 @@ import {BsModalService} from "ngx-bootstrap/modal";
   declarations: [
     AppComponent,
     NewEmployeeDailogComponent,
-    HomePageComponent,
     ModelMaterialComponent,
     NewEmployeeBootstrapComponent,
     ModelBootstrapComponent

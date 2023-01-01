@@ -37,3 +37,6 @@ th.sortable.desc::after {
 th.sortable:hover::after {
   color: #333;
 }
+body {
+  background-image: url("../../../assets/app-model-background.png");
+}
