@@ -3,6 +3,7 @@ import {MatTableDataSource} from "@angular/material/table";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatDialog} from '@angular/material/dialog';
 import {NewEmployeeDailogComponent} from "./new-employee-dailog/new-employee-dailog.component";
+import {ServiceDB} from  '../Service/ServiceDB.service';
 
 export interface PeriodicElement {
   position: number;
@@ -24,11 +25,14 @@ export class ModelMaterialComponent implements AfterViewInit {
   ELEMENT_DATA: PeriodicElement[] = [];
   dataSource = new MatTableDataSource<PeriodicElement>(this.ELEMENT_DATA);
   switch_flag = true;
+  serviceDB: any;
+
 
   @ViewChild(MatPaginator) paginator: any;
   ngAfterViewInit() {
-    this.dataSource = new MatTableDataSource<PeriodicElement>(JSON.parse(localStorage.getItem('data') || '{}'));
-    this.ELEMENT_DATA = JSON.parse(localStorage.getItem('data') || '[]');
+    this.serviceDB = new ServiceDB();
+    this.dataSource = new MatTableDataSource<PeriodicElement>(this.serviceDB.get_data());
+    this.ELEMENT_DATA = this.serviceDB.get_data();
     this.dataSource.paginator = this.paginator;
   }
 
@@ -92,14 +96,16 @@ sort_data_by_prio(_arr: any) {
       this.updateTable();
     });
   }
+
   deleteRow(data: any) {
     this.ELEMENT_DATA.splice(data.position-1, 1);
     this.update_indexs();
     this.updateTable();
   }
+
   updateTable(){
     this.dataSource = new MatTableDataSource<PeriodicElement>(this.ELEMENT_DATA);
-    localStorage.setItem('data', JSON.stringify(this.ELEMENT_DATA));
+    this.serviceDB.updateTable(this.ELEMENT_DATA);
     this.dataSource.paginator = this.paginator;
   }
 

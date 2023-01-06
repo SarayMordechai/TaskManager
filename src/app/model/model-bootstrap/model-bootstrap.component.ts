@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import { NewEmployeeBootstrapComponent } from './new-employee-bootstrap/new-employee-bootstrap.component';
 import { BsModalService } from 'ngx-bootstrap/modal';
+import {ServiceDB} from  '../Service/ServiceDB.service';
 
 interface PeriodicElement {
   position: number;
@@ -29,9 +30,11 @@ export class ModelBootstrapComponent implements OnInit {
   page: any;
   total$: any;
   pages: number[] | undefined ;
+  serviceDB: any;
 
   ngOnInit() {
-    this.PeriodicElement = JSON.parse(localStorage.getItem('data') || '[]');
+    this.serviceDB = new ServiceDB();
+    this.PeriodicElement = this.serviceDB.get_data();
     this.pages = Array(Math.ceil(this.PeriodicElement.length / 5)).fill(0).map((x, i) => i + 1);
     this.update_indexs();
   }
@@ -80,7 +83,7 @@ export class ModelBootstrapComponent implements OnInit {
     this.updateTable();
   }
   updateTable(){
-    localStorage.setItem('data', JSON.stringify(this.PeriodicElement));
+    this.serviceDB.updateTable(this.PeriodicElement);
     this.pages = Array(Math.ceil(this.PeriodicElement.length / 5)).fill(0).map((x, i) => i + 1);
     this.update_indexs();
 

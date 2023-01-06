@@ -4,8 +4,7 @@ html{
 }
 body{
   height: 100%;
-  background-image: url("assets/app-model-background.png");
-
+  background-image: url("src/assets/app-model-background.png");
 }
 
 html, body { height: 100%; }
